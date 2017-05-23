@@ -104,7 +104,7 @@ class ProfileController extends Controller
     }
 
 
-    public function download( $filename = '' )
+    public function download()
     {
 
         //File download code
