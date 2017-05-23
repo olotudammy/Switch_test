@@ -43,6 +43,12 @@
                             </div>
 
 
+                            <label for='to'> To Email</label>
+                            <input type="text" name="to">
+
+                            <br><br>
+
+
 
                              {!! Form::label('attach', 'ATTACH IMAGE') !!}
                                 {!! Form::file('attach_file') !!} 

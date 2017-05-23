@@ -7,7 +7,9 @@
 
 	<h1> Welcome to Switch </h1>
 
-	{{ $d }}
+	 <br>
+
+	{{ $newMessage }}
 
 	<br>
 

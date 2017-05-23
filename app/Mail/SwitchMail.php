@@ -3,6 +3,8 @@
 namespace App\Mail;
 
 use Illuminate\Bus\Queueable;
+use Illuminate\Http\Request;
+
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -31,13 +33,12 @@ class SwitchMail extends Mailable
      *
      * @return $this
      */
-    public function build()
+    public function build(Request $request)
     {
         $data = Auth::user();
-        $mess = Profile::find(Auth::id());
-        $d = $data->profile->message;
+        $newMessage = $request->message;
         $f = $data->profile->file;
-        return $this->view('email' , compact('data', 'd', 'f'));
+        return $this->view('email' , compact('data',  'f', 'newMessage'));
                     
     }
 }
