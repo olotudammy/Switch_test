@@ -52,14 +52,9 @@ class ProfileController extends Controller
 
    public function processForm(Request $request)
    {
-        /*Mail::send(['text'=>'email'], ['name'=> 'Adeojo Tunde'], function($message) {
-            $message->to('olotudammy@gmail.com', 'Switch Email')->subject('Testing');
-            $message->from(Auth::user()->email, 'Switch Email');
-
-        });*/
-
-
+        
         $user = Auth::user()->profile()->update(['message'=> $request->message]);
+        $email = $request->to;
 
 
         $file = $request->file('attach_file');
@@ -73,18 +68,8 @@ class ProfileController extends Controller
             //return redirect()->back();
         }
 
-
-
-
-
-
-
-        $sendToUser = User::find(Auth::id());
-
-        Mail::to(Auth::user()->email)->send(new SwitchMail());
-
+        Mail::to($email)->send(new SwitchMail());
         $request->session()->put('status', 'Mail was successful!');
-
         return redirect(route('home'));
     }
 
