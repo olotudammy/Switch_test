@@ -104,8 +104,10 @@ class ProfileController extends Controller
     }
 
 
-    public function download( $filename = '' )
+    public function download()
     {
+
+        //File download code
         $filename = "file.txt";
         $file_path = base_path('public/'.$filename.'');
         $headers = array(
