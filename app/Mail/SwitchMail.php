@@ -36,7 +36,6 @@ class SwitchMail extends Mailable
     public function build(Request $request)
     {
         $data = Auth::user();
-        Auth::user();
         $newMessage = $request->message;
         $f = $data->profile->file;
         return $this->view('email' , compact('data',  'f', 'newMessage'));

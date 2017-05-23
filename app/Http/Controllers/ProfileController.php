@@ -86,19 +86,39 @@ class ProfileController extends Controller
     public function orderTxt(Request $request)
     {
 
-        $order = 'I will update the function and push later';
-        return view('order', compact('order'));
-        /*$data = $request->myMessage;
-        $content = \View::make('order', compact('data'));
-        \Response::make($content, '200')->header('Content-Type', 'plain/txt');
-         return view('order');*/
+        /*$order = 'I will update the function and push later';
+        return view('order', compact('order'));*/
+
+        $my_file = 'file.txt';
+        $handle = fopen($my_file, 'w') or die('Cannot open file:  '.$my_file);
+        $data = $request->myMessage;
+        fwrite($handle, $data);
+
+        $link = '';
+
+        $link = response()->download(base_path('public/'.$my_file.''));
+
+        return view('text_result', compact('my_file', 'link'));
+        
+
+    }
 
 
-         /*$fileText = "This is some text\nThis test belongs to my file download\nBooyah";
-        $myName = "ThisDownload.txt";
-        $headers = ['Content-type'=>'text/plain', 'test'=>'YoYo', 'Content-Disposition'=>sprintf('attachment; filename="%s"', $myName),'X-BooYAH'=>'WorkyWorky','Content-Length'=>sizeof($fileText)];
-        return Response::make($fileText, 200, $headers);*/
-
+    public function download( $filename = '' )
+    {
+        $filename = "file.txt";
+        $file_path = base_path('public/'.$filename.'');
+        $headers = array(
+            'Content-Type: csv',
+            'Content-Disposition: attachment; filename='.$filename,
+        );
+        if ( file_exists( $file_path ) ) {
+           
+            return \Response::download( $file_path, $filename, $headers );
+        } else {
+            // Error
+            exit( 'Requested file does not exist on our server!' );
+        }
     }
 }
 

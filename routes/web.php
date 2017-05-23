@@ -30,5 +30,7 @@ Route::get('/text_file', 'ProfileController@textForm')->name('text_t');
 
 Route::post('/text_file', 'ProfileController@orderTxt')->name('text_form');
 
+Route::any('/download', 'ProfileController@download');
+
 
 
